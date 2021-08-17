@@ -26,7 +26,10 @@ namespace Euler
             
             Console.WriteLine("We do be running tho");
             
-            //BigPrimeNumber.FindNthPrime(100001); // Question 7
+            // Question 7
+            //BigPrimeNumber.FindNthPrime(100001);
+            
+            // Quesion 8
             var result8 = LargestProductInASeries.FindLargestProduct(question8Input, 13);
             Console.WriteLine(result8);
         }

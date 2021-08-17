@@ -4,43 +4,29 @@ namespace Euler.Question8
 {
     public static class LargestProductInASeries
     {
-        public static int FindLargestProduct(string input, int windowSize)
+        public static float FindLargestProduct(string input, int windowSize)
         {
-            var largestProduct = 0;
+            var largestProduct = 0.0f;
             var previousWindow = 0;
-            for (var i = 0; i < input.Length - windowSize; i++)
+
+            for (var i = 0; i < (input.Length - windowSize) + 1; i++)
             {
-                if (largestProduct == 0)
+                var subWindow = input.Substring(i, windowSize);
+                var total = 1.0f;
+                foreach(var letter in subWindow)
                 {
-                    var initialWindow = CalculateInitialWindow(input, windowSize);
-                    largestProduct = initialWindow;
-                    previousWindow = initialWindow;
+                    total *= Int64.Parse(letter.ToString());
                 }
-                else
+
+                if (total > largestProduct)
                 {
-                    var newWindow = previousWindow / int.Parse(input[i - 1].ToString()); //Remove first value
-                    newWindow += newWindow * int.Parse(input[i + windowSize].ToString()); // Add last value
-                    Console.WriteLine($"newWindow: {input.Substring(i, windowSize)}");
-                    if (newWindow > largestProduct)
-                    {
-                        largestProduct = newWindow;
-                    }
-                    previousWindow = newWindow;
+                    largestProduct = total;
                 }
+                Console.WriteLine($"Count: {i} - Subwindow: {subWindow} - Total: {total}");
             }
 
+            Console.WriteLine($"Largest Product: {largestProduct}");
             return largestProduct;
-        }
-
-        private static int CalculateInitialWindow(string input, int windowSize)
-        {
-            var initialCount = 1;
-            for (var i = 0; i < windowSize; i++)
-            {
-                initialCount += initialCount * int.Parse(input[i].ToString());
-            }
-
-            return initialCount;
         }
     }
 }
